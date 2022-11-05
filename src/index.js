@@ -39,7 +39,7 @@ const sendNotification = async (recipients, title, msg, img) => {
         img: img,
       },
       recipients: eval(recipients),
-      channel: "eip155:5:0x9017804aE02877C32739A7703400326e9Ac9a04d", // your channel address
+      channel: "eip155:5:0x9017804aE02877C32739A7703400326e9Ac9a04d", // Scorebox channel address on staging
       env: "staging",
     });
 
@@ -49,7 +49,7 @@ const sendNotification = async (recipients, title, msg, img) => {
   }
 };
 
-app.post("/api", (req, res) => {
+app.post("/api", (req) => {
   //console.log(req["query"]["recipients"]); //test returning recipient array
   sendNotification(
     req["query"]["recipients"],
