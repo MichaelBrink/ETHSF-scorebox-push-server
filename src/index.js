@@ -43,16 +43,58 @@ const sendNotification = async (recipients, title, msg, img) => {
       env: "staging",
     });
 
-    console.log("sent!");
+    console.log("Score update sent!");
   } catch (err) {
     console.error("Error: ", err);
   }
 };
 
-app.post("/api", (req) => {
+const sendSingleNotification = async (recipient, title, msg, img) => {
+  /*
+    recipients = array of address to send notificationt to
+    msg = leaderboard or score update message
+    img = leaderboard or score update image (use flaticon.com?)
+    */
+  try {
+    const apiResponse = await PushAPI.payloads.sendNotification({
+      signer,
+      type: 3, // subset
+      identityType: 2, // Minimal payload
+      notification: {
+        title: title,
+        body: msg,
+      },
+      payload: {
+        title: title,
+        body: msg,
+        cta: "",
+        img: img,
+      },
+      recipients: recipient,
+      channel: "eip155:5:0x9017804aE02877C32739A7703400326e9Ac9a04d", // Scorebox channel address on staging
+      env: "staging",
+    });
+
+    console.log("Score update sent!");
+  } catch (err) {
+    console.error("Error: ", err);
+  }
+};
+
+app.post("/scoreupdate", (req) => {
   //console.log(req["query"]["recipients"]); //test returning recipient array
   sendNotification(
     req["query"]["recipients"],
+    req.headers["title"],
+    req.headers["msg"],
+    req.headers["img"]
+  );
+});
+
+app.post("/leaderboard", (req) => {
+  //console.log(req["query"]["recipients"]); //test returning recipient array
+  sendSingleNotification(
+    req.headers["recipient"],
     req.headers["title"],
     req.headers["msg"],
     req.headers["img"]
