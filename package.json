@@ -1,0 +1,17 @@
+{
+  "name": "ETHSF-scorebox-push-server",
+  "version": "1.0.0",
+  "description": "ScoreBox Notification Server",
+  "main": "index.js",
+  "repository": "https://github.com/MichaelBrink/ETHSF-scorebox-push-server.git",
+  "author": "Michael Brink <michaelbrink3@gmail.com>",
+  "license": "Apache 2.0",
+  "private": null,
+  "dependencies": {
+    "@pushprotocol/restapi": "^0.2.1",
+    "ethers": "^5.7.2",
+    "install": "^0.13.0",
+    "npm": "^8.19.3",
+    "or": "^0.2.0"
+  }
+}
