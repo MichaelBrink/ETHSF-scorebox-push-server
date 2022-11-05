@@ -75,7 +75,7 @@ const sendSingleNotification = async (recipient, title, msg, img) => {
       env: "staging",
     });
 
-    console.log("Score update sent!");
+    console.log("Leaderboard update sent!");
   } catch (err) {
     console.error("Error: ", err);
   }
